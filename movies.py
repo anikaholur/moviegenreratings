@@ -13,17 +13,18 @@ warnings.filterwarnings("ignore")
 def init_connection():
     return pymongo.MongoClient(**st.secrets["mongo"])
 
+
 client = init_connection()
 
 
 # identifying the database we want to read from
-db = client.fakedata
+db = client["fakedata"]
 
 # identifying the collection we want to read from
-mycollection = db["movies"]
+myCollection = db["movies"]
 
 # saving data in Pandas dataframe
-df = pd.DataFrame(list(mycollection.find()))
+df = pd.DataFrame(list(myCollection.find()))
 
 # getting rid of the id field
 df1 = df.drop(['_id'], axis=1)
@@ -40,19 +41,12 @@ st.subheader("A simple web app that shows statistics on Netflix Movies and TV Sh
 st.write(df1.describe())
 st.dataframe(df1)
 
-# creating a chart
-# fig, ax = plt.subplots()
-# ax.scatter(x=df1['GENRE'], y=df1['VOTES'])
-# ax.set_xlabel('GENRE')
-# ax.set_ylabel('RATING')
-# ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-# st.pyplot(fig)
 # creating a bar chart using seaborn
 sns.set_theme(style='darkgrid', rc={'figure.dpi': 147},
               font_scale=0.7)
 fig, ax = plt.subplots(figsize=(7, 2))
 ax.set_title("Ratings Across Various Genres")
-chart = sns.barplot(x='GENRE', y='RATING', data=df1, ci=None)
+chart = sns.barplot(x='Genre', y='Rating', data=df1, ci=None)
 ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
 plt.xticks(fontsize=7)
 # ax.figure
@@ -62,44 +56,3 @@ for p in chart.patches:
                    textcoords='offset points')
 
 st.pyplot(fig)
-
-# uploaded_file = st.file_uploader('Upload your file here')
-
-# if uploaded_file:
-# st.header('Data Statistics')
-# df = pd.read_csv(uploaded_file)
-# st.write(df.describe())
-
-# st.header('Data Header')
-# st.write(df.head())
-
-# fig, ax = plt.subplots()
-# ax.scatter(x=df['GENRE'], y=df['VOTES'])
-# ax.set_xlabel('GENRE')
-# ax.set_ylabel('VOTES')
-# ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-
-# st.pyplot(fig)
-
-
-# fetching one record from our collection
-# one_record = mycollection.find_one()
-# print(one_record)
-
-# fetching all the records from our collection
-# all_records = mycollection.find()
-# print(all_records)
-# run a for loop here to extract from cursor
-# for row in all_records:
-# print(row)
-
-# convert cursor into list
-# all_records = mycollection.find()
-# print(all_records)
-# list_cursor = list(all_records)
-# print(list_cursor)
-# now we should have a list of dictionaries
-# now we should have a dataframe
-# df = pd.DataFrame(list_cursor)
-# df.head()
-# df.tail()
