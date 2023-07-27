@@ -7,11 +7,17 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
+
 # establishing the connection between MongoDB and Python
-client = pymongo.MongoClient("mongodb://localhost:27017")
+@st.cache_resource
+def init_connection():
+    return pymongo.MongoClient(**st.secrets["mongo"])
+
+client = init_connection()
+
 
 # identifying the database we want to read from
-db = client["fakedata"]
+db = client.fakedata
 
 # identifying the collection we want to read from
 mycollection = db["movies"]
