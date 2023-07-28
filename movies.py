@@ -10,9 +10,13 @@ warnings.filterwarnings("ignore")
 
 
 # establishing the connection between MongoDB and Python
-#@st.experimental_singleton(suppress_st_warning=True)
+# Uses st.cache_resource to only run once.
+@st.cache_resource
 def init_connection():
-    return pymongo.MongoClient("mongodb+srv://st.secrets.db_username:st.secrets.db_pswd@st.secrets.cluster_name.qrqm7sw.mongodb.net/?retryWrites=true&w=majority")
+    return pymongo.MongoClient(**st.secrets["mongo"])
+#@st.experimental_singleton(suppress_st_warning=True)
+#def init_connection():
+    #return pymongo.MongoClient("mongodb+srv://st.secrets.db_username:st.secrets.db_pswd@st.secrets.cluster_name.qrqm7sw.mongodb.net/?retryWrites=true&w=majority")
 
 
 client = init_connection()
