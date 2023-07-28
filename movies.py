@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore")
 
 
 # establishing the connection between MongoDB and Python
-@st.experimental_singleton(suppress_st_warning=True)
+#@st.experimental_singleton(suppress_st_warning=True)
 def init_connection():
     return pymongo.MongoClient("mongodb+srv://st.secrets.db_username:st.secrets.db_pswd@st.secrets.cluster_name.qrqm7sw.mongodb.net/?retryWrites=true&w=majority")
 
