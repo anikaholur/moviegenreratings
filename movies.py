@@ -1,4 +1,5 @@
 import pymongo
+from pymongo import MongoClient
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -9,9 +10,12 @@ warnings.filterwarnings("ignore")
 
 
 # establishing the connection between MongoDB and Python
+#@st.experimental_singleton(suppress_st_warning=True)
+#def init_connection():
+    #return pymongo.MongoClient("mongodb+srv://st.secrets.db_username:st.secrets.db_pswd@st.secrets.cluster_name.qrqm7sw.mongodb.net/?retryWrites=true&w=majority")
 @st.cache_resource
 def init_connection():
-    return pymongo.MongoClient(**st.secrets["mongo"])
+    return pymongo.MongoClient("mongodb+srv://anikaholur8:Sarcasm_1234@mymcluster.qrqm7sw.mongodb.net/?retryWrites=true&w=majority")
 
 
 client = init_connection()
@@ -32,7 +36,7 @@ df1 = df.drop(['_id'], axis=1)
 # data is ready to go in a Pandas dataframe: we just need to visualize it on Streamlit!
 
 # setting screen size
-st.set_page_config(layout="wide", page_title="Netflix Movies and TV Shows")
+#st.set_page_config(layout="wide", page_title="Netflix Movies and TV Shows")
 
 # main title
 st.title("Ratings Across Movie Genres")
@@ -56,3 +60,4 @@ for p in chart.patches:
                    textcoords='offset points')
 
 st.pyplot(fig)
+
