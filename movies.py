@@ -13,7 +13,7 @@ warnings.filterwarnings("ignore")
 # Uses st.cache_resource to only run once.
 @st.cache_resource
 def init_connection():
-    return pymongo.MongoClient("mongodb+srv://anikaholur8:mongodb_5583@mymcluster.qrqm7sw.mongodb.net/?retryWrites=true&w=majority")
+    return pymongo.MongoClient("mongodb+srv://anikaholur8:Sarcasm_1234@mymcluster.qrqm7sw.mongodb.net/?retryWrites=true&w=majority")
 
 
 client = init_connection()
