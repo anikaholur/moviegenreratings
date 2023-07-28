@@ -16,7 +16,7 @@ def init_connection():
     return pymongo.MongoClient(**st.secrets["mongo"])
 #@st.experimental_singleton(suppress_st_warning=True)
 #def init_connection():
-    #return pymongo.MongoClient("mongodb+srv://st.secrets.db_username:st.secrets.db_pswd@st.secrets.cluster_name.qrqm7sw.mongodb.net/?retryWrites=true&w=majority")
+    #return pymongo.MongoClient("mongodb+srv://anikaholur8:Sarcasm_1234@mymcluster.qrqm7sw.mongodb.net/?retryWrites=true&w=majority")
 
 
 client = init_connection()
