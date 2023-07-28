@@ -23,7 +23,7 @@ client = init_connection()
 db = client["fakedata"]
 
 # identifying the collection we want to read from
-myCollection = db["movies"]
+myCollection = db["cleanedmovies"]
 
 # saving data in Pandas dataframe
 df = pd.DataFrame(list(myCollection.find()))
@@ -48,7 +48,7 @@ sns.set_theme(style='darkgrid', rc={'figure.dpi': 147},
               font_scale=0.7)
 fig, ax = plt.subplots(figsize=(7, 2))
 ax.set_title("Ratings Across Various Genres")
-chart = sns.barplot(x='Genre', y='Rating', data=df1, ci=None)
+chart = sns.barplot(x='GENRE', y='RATING', data=df1, ci=None)
 ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
 plt.xticks(fontsize=7)
 # ax.figure
